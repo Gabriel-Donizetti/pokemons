@@ -1,8 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { z} from "zod"
-import { userSchema } from "../interfaces/user";
+import { userDTO } from "../interfaces/user";
 
-type User = z.infer<typeof userSchema>
 
 class UserRepository{
     prisma:PrismaClient;
@@ -10,7 +8,17 @@ class UserRepository{
         this.prisma = new PrismaClient;
     }
 
-    async createUser(user: User) {
+    async findTrainer(id: number){
+        const trainer = await this.prisma.user.findUnique({
+            where:{
+                id: id
+            },
+        })
+
+        return trainer
+    }
+
+    async create(user: userDTO) {
         const trainer = await this.prisma.user.create({
             data:{
                trainer: user.name,
@@ -21,6 +29,18 @@ class UserRepository{
         return trainer;
     }
 
+    async update(name: string, id: number){
+        const trainer = await this.prisma.user.update({
+            where:{
+                id: id
+            },
+            data:{
+                trainer: name
+            }
+        })
+
+        return trainer
+    }
    
 }
 

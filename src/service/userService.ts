@@ -1,8 +1,5 @@
-import { userSchema } from "../interfaces/user";
-import { z} from "zod"
+import { userDTO } from "../interfaces/user";
 import UserRepository from "../repository/userRepository";
-
-type User = z.infer<typeof userSchema>
 
 export default class UserService{
     userRepository:UserRepository;
@@ -11,14 +8,24 @@ export default class UserService{
     }
 
     /**
-    * @param User
+    * @param userDTO
     * @returns
     */
-    async create(User:User){
-        const trainer = await this.userRepository.createUser(User);
+    async create(User:userDTO){
+        const trainer = await this.userRepository.create(User);
         if(!trainer){
             throw new Error ('Error on create trainer')
         }
+        return trainer;        
+    }
+
+    
+     async update(name: string, id: number){
+        const find = await this.userRepository.findTrainer(id);
+        if(!find){
+            throw new Error('Trainer not find')
+        }
+        const trainer = await this.userRepository.update(name, id);
         return trainer;        
     }
 

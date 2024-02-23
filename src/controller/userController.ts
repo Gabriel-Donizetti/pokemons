@@ -1,10 +1,8 @@
 import { Request, Response } from "express";
-import { userSchema } from "../interfaces/user";
-import { z} from "zod"
+import { userDTO } from "../interfaces/user";
 import UserService from "../service/userService";
 
 const userService = new UserService();
-type User = z.infer<typeof userSchema>
 
 export class UserController {
 
@@ -12,10 +10,22 @@ export class UserController {
         try {
             const {name, type} = req.body;
 
-            const user: User ={
+            const user: userDTO ={
                 name, type
             }
             const resService = await userService.create(user)
+            return res.status(200).json({resService});
+        } catch (error) {
+            return res.status(502).json(error);
+        }
+    }
+
+    static async update(req: Request, res: Response){
+        try {
+            const {name} = req.body;
+            const id = parseInt(req.params.id);
+
+            const resService = await userService.update(name, id)
             return res.status(200).json({resService});
         } catch (error) {
             return res.status(502).json(error);

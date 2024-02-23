@@ -11,6 +11,16 @@ POST {{apiurl}}/pokemons HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Gabrie",
+    "name": "Gabriel",
     "type": "Pikachu"
 }
+
+###
+
+PATCH {{apiurl}}/pokemons/p/2 HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Maria Tereza"
+}
+
