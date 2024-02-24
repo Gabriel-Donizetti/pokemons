@@ -37,4 +37,8 @@ GET {{apiurl}}/pokemons/2
 
 GET {{apiurl}}/pokemons/
 
+###
+
+POST {{apiurl}}/batalha/2/3
+
 

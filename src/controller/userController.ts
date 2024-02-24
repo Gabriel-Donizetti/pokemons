@@ -64,4 +64,17 @@ export class UserController {
             return res.status(502).json(error);
         }
     }
+
+    static async battle(req: Request, res: Response){
+        try {
+            const id1 = parseInt(req.params.id1)
+            const id2 = parseInt(req.params.id2)
+
+            const resService = await userService.battle(id1, id2)
+
+            return res.status(200).json(resService)
+        } catch (error) {
+            return res.status(502).json(error);
+        }
+    }
 }

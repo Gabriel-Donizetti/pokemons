@@ -63,6 +63,19 @@ class UserRepository{
 
         return trainer
     }
+
+    async updateLevel(id: number, level: number){
+        const trainer = await this.prisma.user.update({
+            where: {
+                id: id
+            },
+            data:{
+                level: level
+            }
+        })
+
+        return trainer
+    }
    
 }
 
