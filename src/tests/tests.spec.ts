@@ -26,4 +26,21 @@ describe("Testes unitários", () => {
             expect(error.message).toEqual('Trainer not find');
         }
     })
+
+    test('Deletar um treinador pokemon', async () =>{
+        const trainer = await userService.create({ name: 'Gabriel', type: 'Gengar' })
+        const trainerId = trainer.id;
+
+        const result = await userService.delete(trainerId)
+
+        expect(result).toEqual('Trainer deleted')
+    })
+
+    test('Deletar um treinador pokemon inexistente', async() => {
+        try {
+            await userService.delete(10000)
+        } catch (error: any) {
+            expect(error.message).toEqual('Trainer not find')
+        }
+    })
 })

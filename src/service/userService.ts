@@ -37,7 +37,7 @@ export default class UserService{
         }
 
         const trainer = await this.userRepository.delete(id)
-        return trainer
+        return 'Trainer deleted'
     }
 
     async getTrainer(id: number){
