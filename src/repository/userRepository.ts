@@ -41,6 +41,16 @@ class UserRepository{
 
         return trainer
     }
+
+    async delete(id: number){
+        const trainer = await this.prisma.user.delete({
+            where:{
+                id: id
+            },
+        })
+
+        return trainer
+    }
    
 }
 

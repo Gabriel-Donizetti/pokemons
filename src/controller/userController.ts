@@ -31,4 +31,22 @@ export class UserController {
             return res.status(502).json(error);
         }
     }
+
+    static async delete(req: Request, res: Response){
+        try {
+            const id = parseInt(req.params.id);
+
+            const resService = await userService.delete(id)
+
+            return res.status(204).json({resService})
+        } catch (error) {
+            return res.status(502).json(error);
+        }
+    }
+    static async getTrainer(req: Request, res: Response){
+        
+    }
+    static async getAllTrainers(req: Request, res: Response){
+        
+    }
 }
