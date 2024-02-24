@@ -69,10 +69,9 @@ export default class UserService{
         }
         const level2 = trainer2.level;
     
-        const percent1 = level1 / (level1 + level2);
-        const percent2 = level2 / (level1 + level2);
+        const probability = level1 / (level1 + level2);
     
-        const winner = Math.random() < percent1 ? trainer1 : trainer2;
+        const winner = Math.random() < probability ? trainer1 : trainer2;
     
         if (winner === trainer1) {
             const newLevel = level1 + 1;

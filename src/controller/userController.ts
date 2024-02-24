@@ -38,9 +38,9 @@ export class UserController {
 
             const resService = await userService.delete(id)
 
-            return res.status(204).json({resService})
-        } catch (error) {
-            return res.status(502).json(error);
+            return res.status(204).json({message:resService})
+        } catch (error: any) {
+            return res.status(502).json({message:error.message});
         }
     }
     static async getTrainer(req: Request, res: Response){
@@ -48,18 +48,18 @@ export class UserController {
             const id = parseInt(req.params.id);
 
             const resService = await userService.getTrainer(id)
-            return res.status(200).json(resService)
-        } catch (error) {
-            return res.status(502).json(error);
+            return res.status(200).json({message:resService})
+        } catch (error: any) {
+            return res.status(502).json({message:error.message});
         }
     }
     static async getAllTrainers(req: Request, res: Response){
         try {
             const resService = await userService.getAllTrainers()
 
-            return res.status(200).json(resService)
-        } catch (error) {
-            return res.status(502).json(error);
+            return res.status(200).json({message:resService})
+        } catch (error: any) {
+            return res.status(502).json({message:error.message});
         }
     }
 

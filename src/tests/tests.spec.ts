@@ -43,4 +43,28 @@ describe("Testes unitários", () => {
             expect(error.message).toEqual('Trainer not find')
         }
     })
+
+    test('Buscar um treinador pokemon', async () =>{
+        const result = await userService.getTrainer(15)
+
+        expect(result.id).toEqual(15)
+        expect(result.level).toEqual(1)
+        expect(result.trainer).toEqual('Gabriel')
+        expect(result.type).toEqual('Gengar')
+    })
+
+    test('Buscar um treinador pokemon inexistente', async () =>{
+        try {
+            await userService.getTrainer(10000)
+        } catch (error: any) {
+            expect(error.message).toEqual('Trainer not find')
+        }
+    })
+
+    test('Buscar todos os treinadores', async () =>{
+        const result = await userService.getAllTrainers()
+
+        expect(Array.isArray(result)).toBe(true)
+        expect(result.length).toBeGreaterThan(0)
+    })
 })
