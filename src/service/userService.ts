@@ -29,4 +29,30 @@ export default class UserService{
         return trainer;        
     }
 
+    async delete(id: number){
+        const find = await this.userRepository.findTrainer(id)
+        if(!find){
+            throw new Error('Trainer not find')
+        }
+
+        const trainer = await this.userRepository.delete(id)
+        return trainer
+    }
+
+    async getTrainer(id: number){
+        const trainer = await this.userRepository.findTrainer(id)
+        if(!trainer){
+            throw new Error('Trainer not find')
+        }
+
+        return trainer
+        
+    }
+
+    async getAllTrainers(){
+        const trainers = await this.userRepository.findAllTrainers()
+
+        return trainers;
+    }
+
 }

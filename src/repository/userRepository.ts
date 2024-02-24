@@ -9,13 +9,25 @@ class UserRepository{
     }
 
     async findTrainer(id: number){
-        const trainer = await this.prisma.user.findUnique({
+        const trainer = await this.prisma.user.findUniqueOrThrow({
             where:{
                 id: id
             },
         })
 
+        console.log(trainer)
+
         return trainer
+    }
+
+    async findAllTrainers(){
+        const trainers = await this.prisma.user.findMany({
+           orderBy:{
+            id:'asc'
+           }
+        })
+        
+        return trainers
     }
 
     async create(user: userDTO) {

@@ -26,7 +26,7 @@ export class UserController {
             const id = parseInt(req.params.id);
 
             const resService = await userService.update(name, id)
-            return res.status(200).json({resService});
+            return res.status(204).json({resService});
         } catch (error) {
             return res.status(502).json(error);
         }
@@ -44,9 +44,24 @@ export class UserController {
         }
     }
     static async getTrainer(req: Request, res: Response){
-        
+        try {
+            const id = parseInt(req.params.id);
+
+            const resService = await userService.getTrainer(id)
+             
+            console.log(resService)
+            return res.status(200).json(resService)
+        } catch (error) {
+            return res.status(502).json(error);
+        }
     }
     static async getAllTrainers(req: Request, res: Response){
-        
+        try {
+            const resService = await userService.getAllTrainers()
+
+            return res.status(200).json(resService)
+        } catch (error) {
+            return res.status(502).json(error);
+        }
     }
 }
