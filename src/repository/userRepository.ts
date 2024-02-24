@@ -9,13 +9,11 @@ class UserRepository{
     }
 
     async findTrainer(id: number){
-        const trainer = await this.prisma.user.findUniqueOrThrow({
+        const trainer = await this.prisma.user.findUnique({
             where:{
                 id: id
             },
         })
-
-        console.log(trainer)
 
         return trainer
     }

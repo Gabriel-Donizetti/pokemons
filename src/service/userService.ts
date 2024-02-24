@@ -1,3 +1,4 @@
+import { json } from "stream/consumers";
 import { userDTO } from "../interfaces/user";
 import UserRepository from "../repository/userRepository";
 
@@ -26,7 +27,7 @@ export default class UserService{
             throw new Error('Trainer not find')
         }
         const trainer = await this.userRepository.update(name, id);
-        return trainer;        
+        return 'Trainer updated';        
     }
 
     async delete(id: number){

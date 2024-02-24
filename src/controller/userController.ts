@@ -15,8 +15,8 @@ export class UserController {
             }
             const resService = await userService.create(user)
             return res.status(200).json({resService});
-        } catch (error) {
-            return res.status(502).json(error);
+        } catch (error: any) {
+            return res.status(502).json({message:error.message});
         }
     }
 
@@ -26,9 +26,9 @@ export class UserController {
             const id = parseInt(req.params.id);
 
             const resService = await userService.update(name, id)
-            return res.status(204).json({resService});
-        } catch (error) {
-            return res.status(502).json(error);
+            return res.status(204).json({message:resService});
+        } catch (error:any) {
+            return res.status(502).json({message:error.message});
         }
     }
 
@@ -48,8 +48,6 @@ export class UserController {
             const id = parseInt(req.params.id);
 
             const resService = await userService.getTrainer(id)
-             
-            console.log(resService)
             return res.status(200).json(resService)
         } catch (error) {
             return res.status(502).json(error);
