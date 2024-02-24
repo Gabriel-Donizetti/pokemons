@@ -23,7 +23,7 @@ describe("Testes unitários", () => {
         try {
             await userService.update('Maria', 1);
         } catch (error: any) {
-            expect(error.message).toEqual('Trainer not find');
+            expect(error.message).toEqual('Trainer not found');
         }
     })
 
@@ -40,7 +40,7 @@ describe("Testes unitários", () => {
         try {
             await userService.delete(10000)
         } catch (error: any) {
-            expect(error.message).toEqual('Trainer not find')
+            expect(error.message).toEqual('Trainer not found')
         }
     })
 
@@ -57,7 +57,7 @@ describe("Testes unitários", () => {
         try {
             await userService.getTrainer(10000)
         } catch (error: any) {
-            expect(error.message).toEqual('Trainer not find')
+            expect(error.message).toEqual('Trainer not found')
         }
     })
 
@@ -66,5 +66,45 @@ describe("Testes unitários", () => {
 
         expect(Array.isArray(result)).toBe(true)
         expect(result.length).toBeGreaterThan(0)
+    })
+
+    test('Batalha entre treinadores pokemon', async () =>{
+        const trainer1 = await  userService.create({ name: 'Gabriel', type: 'Gengar' })
+        const trainer2 = await userService.create({ name: 'Tereza', type: 'Umbreon' })
+
+        const level1 = trainer1.level
+        const level2 = trainer2.level
+
+        const result =  await userService.battle(trainer1.id, trainer2.id)
+        const idwinner = result.id
+
+
+        const winner = await userService.getTrainer(idwinner)
+
+        if(idwinner == trainer1.id){
+        expect(winner.level).toBeGreaterThan(level1)
+        try {
+            const loser = await userService.getTrainer(trainer2.id)
+            expect(loser.level).toBeLessThan(level2)
+        } catch (error:any) {
+            expect(error.message).toEqual('Trainer not found')
+        }
+        }else {
+        expect(winner.level).toBeGreaterThan(level2)
+        try {
+            const loser = await userService.getTrainer(trainer1.id)
+            expect(loser.level).toBeLessThan(level1)
+        } catch (error:any) {
+            expect(error.message).toEqual('Trainer not found')
+        }
+        }
+    })
+
+    test('Batalha entre treinadores pokemon inexistente', async () =>{
+        try {
+            await userService.battle(-1, -2)
+        } catch (error:any) {
+            expect(error.message).toEqual('Trainer not found')
+        }
     })
 })

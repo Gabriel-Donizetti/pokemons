@@ -24,7 +24,7 @@ export default class UserService{
      async update(name: string, id: number){
         const find = await this.userRepository.findTrainer(id);
         if(!find){
-            throw new Error('Trainer not find')
+            throw new Error('Trainer not found')
         }
         const trainer = await this.userRepository.update(name, id);
         return 'Trainer updated';        
@@ -33,7 +33,7 @@ export default class UserService{
     async delete(id: number){
         const find = await this.userRepository.findTrainer(id)
         if(!find){
-            throw new Error('Trainer not find')
+            throw new Error('Trainer not found')
         }
 
         const trainer = await this.userRepository.delete(id)
@@ -43,7 +43,7 @@ export default class UserService{
     async getTrainer(id: number){
         const trainer = await this.userRepository.findTrainer(id)
         if(!trainer){
-            throw new Error('Trainer not find')
+            throw new Error('Trainer not found')
         }
 
         return trainer
@@ -59,13 +59,13 @@ export default class UserService{
     async battle(id1: number, id2: number){
         const trainer1 = await this.userRepository.findTrainer(id1);
         if (!trainer1) {
-            throw new Error('Trainer 1 not found');
+            throw new Error('Trainer not found');
         }
         const level1 = trainer1.level;
     
         const trainer2 = await this.userRepository.findTrainer(id2);
         if (!trainer2) {
-            throw new Error('Trainer 2 not found');
+            throw new Error('Trainer not found');
         }
         const level2 = trainer2.level;
     
