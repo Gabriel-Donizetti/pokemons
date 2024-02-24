@@ -65,6 +65,7 @@ export class UserController {
         }
     }
 
+    
     static async battle(req: Request, res: Response){
         try {
             const id1 = parseInt(req.params.id1)

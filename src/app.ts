@@ -2,9 +2,14 @@ import express from 'express';
 import http from 'http';
 import cors from 'cors';
 import routes from './routes/mainRoutes';
-import bodyParser from 'body-parser';
+import swaggerUi from 'swagger-ui-express';
+import specs from '../swaggerConfig';
+
 
 const app = express();
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
 
 app.use(cors({
   origin: '*',
