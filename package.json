@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsx src/server.ts",
+    "start": "node ./dist/server.js",
     "start:dev": "tsx watch src/server.ts",
     "build": "tsup src",
     "test": "vitest",
@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1"
   }
 }

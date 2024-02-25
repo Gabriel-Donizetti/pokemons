@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { UserController } from "../controller/userController";
+import requestValidator from "../middleware/requestValidator";
+import { trainerValidator } from "./routerValidator";
 
 const routes : Router = Router();
 
@@ -32,7 +34,7 @@ const routes : Router = Router();
  *       '502':
  *         description: Erro ao criar usuário.
  */
-routes.post('/pokemons', UserController.create)
+routes.post('/pokemons',trainerValidator,requestValidator, UserController.create)
 
 /**
  * @swagger
