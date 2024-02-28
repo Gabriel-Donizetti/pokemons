@@ -12,6 +12,52 @@
 - `Funcionalidade 4`: CARREGAR - Busca e retorna um registro na tabela de pokemons
 - `Funcionalidade 5`: LISTAR - Lista todos os registros da tabela de pokemons
 
-# :heavy_check_mark: Tecnologias utilizadas	
+### 🛠 Tecnologias
 
-- ´teste´
+As seguintes ferramentas foram usadas na construção do projeto:
+
+- [Node.js](https://nodejs.org/en/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Prisma.io](https://www.prisma.io/)
+- [Express](https://expressjs.com/pt-br/)
+
+### Pré-requisitos
+
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+[Node.js](https://nodejs.org/en/), [Docker](https://www.docker.com/).
+
+Crie um container docker com os comandos 
+
+```bash
+#Baixa a imagem do postgres
+$ docker pull postgres
+
+#Sobe o container coms as configurações basicas
+$ docker run -p 5432:5432 -e POSTGRES_PASSWORD=1234 postgres
+````
+
+Para fazer a conexão da aplicação com o container, crie um arquivo .env com a variavel de ambiente 
+DATABASE_URL="postgresql://postgres:1234@localhost:5432/postgres?schema=public"
+
+### 🎲 Rodando a aplicação
+
+```bash
+# Clone este repositório
+$ git clone https://github.com/Gabriel-Donizetti/pokemons.git
+
+# Acesse a pasta do projeto no terminal/cmd
+$ cd pokemons
+
+# Instale as dependências
+$ npm install
+
+#Execute o comendo de migrations para criação do banco
+$ npx prisma migrate dev
+
+# Execute a aplicação em modo de desenvolvimento
+$ npm run start:dev
+
+# O servidor inciará na porta:4000 - acesse <http://localhost:4000>
+````
+
+
